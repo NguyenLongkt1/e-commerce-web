@@ -1,0 +1,18 @@
+<div class="col-md-12">
+    <div class="d-flex">
+        <div class="col-md-2" style="height: 100vh;">
+            <ul nz-menu nzMode="inline" nzTheme="dark" style="height: 100%;">
+                <li *ngFor="let menu of lstMenu" nz-submenu nzTitle="{{menu.name}}" nzIcon="setting" nzOpen>
+                  <ul>
+                    <li *ngFor="let item of menu.children" nz-menu-item (click)="routeToPath(item.path)">
+                        {{item.name}}
+                    </li>
+                  </ul>
+                </li>
+            </ul>    
+        </div>
+        <div class="col-md-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

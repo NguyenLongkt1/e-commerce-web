@@ -1,0 +1,46 @@
+<div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 d-flex justify-content-between align-items-center">
+            <div class="row col-md-2">
+                <img class="main-logo" src="/logo/logo.png" /> 
+                <span class="main-slogan h5">
+                        Tốt & Nhanh
+                </span>
+            </div>
+            <div class="col-md-11 d-flex" style="gap: 25px;">
+                <div class="col-md-8 d-flex align-items-center">
+                    <nz-input-group class="custom-size-input" nzSearch nzSize="large" [nzAddOnAfter]="suffixButton" [nzPrefix]="prefixTemplateUser">
+                        <input type="text" nz-input placeholder="Freeship đơn từ 45k" />
+                    </nz-input-group>
+                    <ng-template #prefixTemplateUser><nz-icon nzType="search" /></ng-template>
+                    <ng-template #suffixButton>
+                        <button nz-button nzType="primary" nzSize="large" nzSearch>Tìm kiếm</button>
+                    </ng-template>
+                </div>
+                <div class="d-flex col-md-4" style="gap: 20px;">
+                    <div class="text-button">
+                        <nz-icon nzType="home" nzTheme="outline" class="main-color default-icon-size me-2"/>
+                        <span class="main-color h5">Trang chủ</span>
+                    </div>
+                    <div class="text-button-grey" (click)="showDialogLogin()">
+                        <nz-icon nzType="smile" nzTheme="outline" class="default-icon-size me-2"/>
+                        <span class="h5">Tài khoản</span>
+                    </div>
+                    <div class="text-button"> 
+                        <nz-icon nzType="shopping-cart" nzTheme="outline" class="pi pi-shopping-cart main-color default-icon-size" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        
+    </div>
+</div>
+<nz-modal [(nzVisible)]="visible" (nzOnCancel)="handleCancel()" nzWidth="50%" [nzFooter]="null">
+    <ng-container *nzModalContent>
+      <app-login></app-login>
+    </ng-container>
+</nz-modal>

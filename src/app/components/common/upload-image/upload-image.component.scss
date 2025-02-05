@@ -1,0 +1,54 @@
+.upload-area{
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 2px dotted #9bc5c6;
+    position: relative;
+    z-index: 10;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(250, 244, 236);
+    }
+    .upload-img{
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+        z-index: 11;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .upload-placeholder{
+        position: absolute;
+        z-index: 9;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+#preview{
+    width: 300px;
+    height: 300px;
+    border-radius: 8px; 
+    position: relative;
+    .previewImg{
+        width: 300px;
+        height: 300px;
+        border-radius: 8px; 
+    }
+    .clear-icon{
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
