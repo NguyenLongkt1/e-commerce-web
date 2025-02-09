@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { UserListComponent } from "../components/cms/user-list/user-list.component";
 import { AddEditUserComponent } from "../components/cms/user-list/add-edit-user/add-edit-user.component";
 import { CmsComponent } from "../components/cms/cms.component";
+import { CategoryListComponent } from "../components/cms/category-list/category-list.component";
+import { AddEditCategoryComponent } from "../components/cms/category-list/add-edit-category/add-edit-category.component";
 
 const routes: Routes = [
     {
@@ -29,6 +31,29 @@ const routes: Routes = [
             {
                 path: '',
                 component: UserListComponent
+            }
+          ]
+        },
+        {
+          path: 'category',
+          children: [
+            {
+              path: 'detail/:id',
+              pathMatch: 'full',
+              component: AddEditCategoryComponent
+            },
+            {
+                path: 'edit/:id',
+                pathMatch: 'full',
+                component: AddEditCategoryComponent
+            },
+            {
+                path: 'add',
+                component: AddEditCategoryComponent
+            },
+            {
+                path: '',
+                component: CategoryListComponent
             }
           ]
         }
