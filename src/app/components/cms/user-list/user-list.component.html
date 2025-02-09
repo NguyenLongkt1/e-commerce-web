@@ -55,7 +55,7 @@
                 <nz-divider nzType="vertical"></nz-divider>
                 <nz-icon (click)="routeToEditPage(data.id)" nzType="edit" nzTheme="outline" style="color: green" class="nz-icon-action"/>
                 <nz-divider nzType="vertical"></nz-divider>
-                <nz-icon nzType="delete" nzTheme="outline" style="color: red" class="nz-icon-action"/>
+                <nz-icon (click)="deleteUser(data.id)" nzType="delete" nzTheme="outline" style="color: red" class="nz-icon-action"/>
               </td>
             </tr>
           }

@@ -10,5 +10,6 @@ export class UserModel{
     address? = '';
     gender? = '';
     birthday? = '';
+    roles? = '';
   }
   

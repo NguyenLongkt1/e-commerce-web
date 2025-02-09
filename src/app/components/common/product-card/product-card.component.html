@@ -1,0 +1,14 @@
+<div>
+    <div class="card-item">
+        <img src="{{picture}}" class="product-picture" />
+        <div class="mt-2">
+            <h4>{{productName}}</h4>
+        </div>
+        <div class="star-element mt-2" *ngIf="star">
+            <nz-rate [ngModel]="star" nzAllowHalf></nz-rate>
+        </div>
+        <div class="mt-3">
+            <h3 class="text-danger text-bold">{{productPrice}}</h3>
+        </div>
+    </div>
+</div>

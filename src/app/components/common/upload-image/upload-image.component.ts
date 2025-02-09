@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-upload-image',
@@ -15,6 +15,8 @@ export class UploadImageComponent implements OnInit{
   @Output() uploadEvent = new EventEmitter();
   @Input() 
   filePath:any;
+  @Input()
+  isView:any;
 
   choosenFile:any;
   previewUrl:any;
@@ -37,8 +39,11 @@ export class UploadImageComponent implements OnInit{
   }
 
   ngOnInit(): void {
-   if(this.filePath && this.filePath != ''){
-    this.previewUrl = this.filePath;
-   }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['filePath'] && changes['filePath'].currentValue) {
+      this.previewUrl = this.filePath;
+    }
   }
 }

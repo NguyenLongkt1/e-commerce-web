@@ -30,6 +30,8 @@ import { NzSelectModule, NzSelectSizeType } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { UploadImageComponent } from './components/common/upload-image/upload-image.component';
+import { ProductCardComponent } from './components/common/product-card/product-card.component';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 
 
 
@@ -46,7 +48,8 @@ registerLocaleData(en);
     AddEditUserComponent,
     CmsComponent,
     LandingComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,8 @@ registerLocaleData(en);
     NzMenuModule,
     NzSelectModule,
     NzDatePickerModule,
-    NzUploadModule
+    NzUploadModule,
+    NzRateModule
   ],
   exports: [
     FormsModule,

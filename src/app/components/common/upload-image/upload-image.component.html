@@ -13,7 +13,7 @@
 
     <div id="preview" *ngIf="previewUrl">
         <img [src]="previewUrl" class="previewImg" />
-        <div class="clear-icon" (click)="clearImg()">
+        <div class="clear-icon" (click)="clearImg()" *ngIf="!isView">
             <nz-icon nzType="close" nzTheme="outline" style="color: #fcfcfc;"/>
         </div>
     </div>
