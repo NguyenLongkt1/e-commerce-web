@@ -41,7 +41,7 @@
               />
             </div>
             <div class="col-md-3">
-              <label>Mô tả <span class="text-danger">*</span></label>
+              <label>Mô tả </label>
               <input
                 [ngClass]="isView ? 'disabled-input' : ''"
                 type="text"
@@ -60,7 +60,7 @@
             nz-button
             nzType="primary"
             class="me-2"
-            (click)="doCreateOrUpdateUser()"
+            (click)="doCreateOrUpdateCategory()"
           >
             <nz-icon nzType="plus" />
             Thêm mới
@@ -70,7 +70,7 @@
             nz-button
             nzType="primary"
             class="me-2"
-            (click)="doCreateOrUpdateUser()"
+            (click)="doCreateOrUpdateCategory()"
           >
             <nz-icon nzType="edit" />
             Cập nhật

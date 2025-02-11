@@ -28,13 +28,7 @@ export class AddEditCategoryComponent implements OnInit {
     this.addEditForm = formBuilder.group({
       name: ['',Validators.required],
       code: ['',Validators.required],
-      description: [''],
-      phoneNumber: ['',Validators.required],
-      email: [''],
-      address: ['',Validators.required],
-      status: [''],
-      birthday: [''],
-      roles: [[]]
+      description: ['']
     })
   }
   isView = false;
@@ -48,16 +42,8 @@ export class AddEditCategoryComponent implements OnInit {
     let params: { [key: string]: any } = {}; 
     for(let key in form.controls){
       let value = form.get(key)?.value;
-      if(key == 'roles'){
-        continue;
-      }
       if(typeof(value) == 'string'){
         value = value.trim();
-      }
-      if(key == 'birthday'){
-        const datePipe = new DatePipe('en-US');
-        const date = new Date(value);
-        value = datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
       }
 
       params[key] = value;
@@ -68,7 +54,7 @@ export class AddEditCategoryComponent implements OnInit {
     return params;
   }
   
-  doCreateOrUpdateUser(){
+  doCreateOrUpdateCategory(){
     let param = this.setParam(this.addEditForm);
     const formData = new FormData();
     if(this.choosenFile){
@@ -77,12 +63,12 @@ export class AddEditCategoryComponent implements OnInit {
     
     formData.append("data",JSON.stringify(param))
 
-    this.httpClient.post(environment.apiUrl+'/users/api/users',formData).subscribe((e:any)=>{
-      this.router.navigate(['/cms/user']);
+    this.httpClient.post(environment.apiUrl+'/categories/category',formData).subscribe((e:any)=>{
+      this.router.navigate(['/cms/category']);
       if(this.id){
-        this.message.success('Cập nhật người dùng thành công')
+        this.message.success('Cập nhật danh mục thành công')
       }else{
-        this.message.success('Thêm mới người dùng thành công')
+        this.message.success('Thêm mới danh mục thành công')
       }
     })
   }
@@ -92,23 +78,17 @@ export class AddEditCategoryComponent implements OnInit {
       nzTitle: 'Xác nhận',
       nzContent: 'Dữ liệu chưa được lưu lại, bạn có muốn hủy bỏ?',
       nzOnOk: () => {
-        this.router.navigate(['/cms/user'])
+        this.router.navigate(['/cms/category'])
       }
     });
   }
 
-  retrieveUser(){
-    this.httpClient.get(environment.apiUrl+'/users/api/users/'+this.id).subscribe((e:any)=>{
-        console.log('retrieve user: ',e);
+  retrieveCategory(){
+    this.httpClient.get(environment.apiUrl+'/categories/category/'+this.id).subscribe((e:any)=>{
         for(let key in e){
-          if(key == 'avatar'){
+          if(key == 'thumbnail'){
             this.avatarPath = e[key];
           }
-          // if(key == 'birthday'){
-          //   this.addEditForm.get(key)?.setValue(formatDate(e[key],'dd/MM/yyyy','Asia/Ho_Chi_Minh'));
-          // }else{
-          //   this.addEditForm.get(key)?.setValue(e[key]);
-          // }
           this.addEditForm.get(key)?.setValue(e[key]);
         }
     })
@@ -121,7 +101,7 @@ export class AddEditCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.id){
-      this.retrieveUser();
+      this.retrieveCategory();
     }
   }
 }
