@@ -5,6 +5,8 @@ import { AddEditUserComponent } from "../components/cms/user-list/add-edit-user/
 import { CmsComponent } from "../components/cms/cms.component";
 import { CategoryListComponent } from "../components/cms/category-list/category-list.component";
 import { AddEditCategoryComponent } from "../components/cms/category-list/add-edit-category/add-edit-category.component";
+import { AddEditShopComponent } from "../components/cms/shop-list/add-edit-shop/add-edit-shop.component";
+import { ShopListComponent } from "../components/cms/shop-list/shop-list.component";
 
 const routes: Routes = [
     {
@@ -56,7 +58,31 @@ const routes: Routes = [
                 component: CategoryListComponent
             }
           ]
-        }
+        },
+        {
+          path: 'shop',
+          children: [
+            {
+              path: 'detail/:id',
+              pathMatch: 'full',
+              component: AddEditShopComponent
+            },
+            {
+                path: 'edit/:id',
+                pathMatch: 'full',
+                component: AddEditShopComponent
+            },
+            {
+                path: 'add',
+                component: AddEditShopComponent
+            },
+            {
+                path: '',
+                component: ShopListComponent
+            }
+          ]
+        },
+        
       ]
     }
 ];

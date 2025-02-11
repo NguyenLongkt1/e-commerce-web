@@ -34,6 +34,8 @@ import { ProductCardComponent } from './components/common/product-card/product-c
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { CategoryListComponent } from './components/cms/category-list/category-list.component';
 import { AddEditCategoryComponent } from './components/cms/category-list/add-edit-category/add-edit-category.component';
+import { ShopListComponent } from './components/cms/shop-list/shop-list.component';
+import { AddEditShopComponent } from './components/cms/shop-list/add-edit-shop/add-edit-shop.component';
 
 
 
@@ -52,7 +54,9 @@ registerLocaleData(en);
     UploadImageComponent,
     ProductCardComponent,
     CategoryListComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    ShopListComponent,
+    AddEditShopComponent
   ],
   imports: [
     BrowserModule,
