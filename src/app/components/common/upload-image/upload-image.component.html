@@ -1,5 +1,5 @@
-<div>
-    <div class="upload-area" *ngIf="!previewUrl">
+<div *ngIf="!multiple">
+    <div class="upload-area" *ngIf="!previewUrl" [ngStyle]="{'width': sizePx +'px','height': sizePx + 'px'}">
         <input type="file" class="upload-img" (change)="onChangeFile($event)"/>
         <div class="upload-placeholder">
             <div class="d-flex justify-content-center row-gap-2">
@@ -15,6 +15,30 @@
         <img [src]="previewUrl" class="previewImg" />
         <div class="clear-icon" (click)="clearImg()" *ngIf="!isView">
             <nz-icon nzType="close" nzTheme="outline" style="color: #fcfcfc;"/>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="multiple">
+    <div *ngIf="lstPreviewUrl" class="d-flex gap-2 flex-wrap">
+        <div *ngFor="let item of lstPreviewUrl; index as i ">
+            <div id="preview" [ngStyle]="{'width': sizePx +'px','height': sizePx + 'px'}">
+                <img [src]="item" class="previewImg" [ngStyle]="{'width': sizePx +'px','height': sizePx + 'px'}" />
+                <div class="clear-icon" (click)="clearImgByIndex(i)" *ngIf="!isView">
+                    <nz-icon nzType="close" nzTheme="outline" style="color: #fcfcfc;"/>
+                </div>
+            </div>
+        </div>
+        <div  class="upload-area" [ngStyle]="{'width': sizePx +'px','height': sizePx + 'px'}">
+            <input multiple="true" type="file" class="upload-img" (change)="onChangeMultipleFile($event)"/>
+            <div class="upload-placeholder">
+                <div class="d-flex justify-content-center row-gap-2">
+                    <nz-icon nzType="plus" nzTheme="outline" style="color: rgb(22, 154, 195)"/>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <span>Tải ảnh lên</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
