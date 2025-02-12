@@ -1,0 +1,105 @@
+<div class="col-md-12 p-1">
+  <div class="col-md-12">
+    <form [formGroup]="searchForm">
+      <div class="row m-2">
+        <div class="col-md-4">
+          <input
+            type="text"
+            nz-input
+            formControlName="fullName"
+            placeholder="Tên người dùng"
+          />
+        </div>
+        <div class="col-md-4">
+          <input
+            type="text"
+            nz-input
+            formControlName="username"
+            placeholder="Tên tài khoản"
+          />
+        </div>
+        <div class="col-md-4">
+          <nz-select
+            formControlName="gender"
+            nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Giới tính"
+          >
+            <nz-option nzValue="MALE" nzLabel="Nam"></nz-option>
+            <nz-option nzValue="FEMALE" nzLabel="Nữ"></nz-option>
+          </nz-select>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-3">
+          <button
+            nz-button
+            nzType="default"
+            class="me-1"
+            (click)="doSearchData()"
+          >
+            <nz-icon nzType="search" />
+            Tìm kiếm
+          </button>
+
+          <button nz-button nzType="primary" (click)="routeToAddPage()">
+            <nz-icon nzType="plus" />
+            Thêm mới
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-12 mt-2">
+    <nz-table #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Họ tên</th>
+          <th>Tài khoản</th>
+          <th>Giới tính</th>
+          <th>Số điện thoại</th>
+          <th>Địa chỉ</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (data of basicTable.data; track data) {
+        <tr>
+          <td>{{ data.fullName }}</td>
+          <td>{{ data.username }}</td>
+          <td>
+            {{ data.gender ? (data.gender == "MALE" ? "Nam" : "Nữ") : "" }}
+          </td>
+          <td>{{ data.phoneNumber }}</td>
+          <td>{{ data.address }}</td>
+          <td>
+            <nz-icon
+              (click)="viewDetail(data.id)"
+              nzType="eye"
+              nzTheme="outline"
+              class="nz-icon-action"
+            />
+            <nz-divider nzType="vertical"></nz-divider>
+            <nz-icon
+              (click)="routeToEditPage(data.id)"
+              nzType="edit"
+              nzTheme="outline"
+              style="color: green"
+              class="nz-icon-action"
+            />
+            <nz-divider nzType="vertical"></nz-divider>
+            <nz-icon
+              (click)="deleteUser(data.id)"
+              nzType="delete"
+              nzTheme="outline"
+              style="color: red"
+              class="nz-icon-action"
+            />
+          </td>
+        </tr>
+        }
+      </tbody>
+    </nz-table>
+  </div>
+</div>

@@ -48,6 +48,11 @@ export class CmsComponent implements OnInit{
         'id': 5,
         'name': 'Quản lý sản phẩm',
         'children': [
+          {
+            'id': 6,
+            'name': 'Quản trị sản phẩm',
+            'path': '/product'
+          }
         ]
       },
     ]

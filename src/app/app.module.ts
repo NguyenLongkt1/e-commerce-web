@@ -36,6 +36,8 @@ import { CategoryListComponent } from './components/cms/category-list/category-l
 import { AddEditCategoryComponent } from './components/cms/category-list/add-edit-category/add-edit-category.component';
 import { ShopListComponent } from './components/cms/shop-list/shop-list.component';
 import { AddEditShopComponent } from './components/cms/shop-list/add-edit-shop/add-edit-shop.component';
+import { ProductListComponent } from './components/cms/product-list/product-list.component';
+import { AddEditProductComponent } from './components/cms/product-list/add-edit-product/add-edit-product.component';
 
 
 
@@ -56,7 +58,9 @@ registerLocaleData(en);
     CategoryListComponent,
     AddEditCategoryComponent,
     ShopListComponent,
-    AddEditShopComponent
+    AddEditShopComponent,
+    ProductListComponent,
+    AddEditProductComponent
   ],
   imports: [
     BrowserModule,
