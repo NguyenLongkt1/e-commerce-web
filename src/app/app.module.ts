@@ -38,6 +38,7 @@ import { ShopListComponent } from './components/cms/shop-list/shop-list.componen
 import { AddEditShopComponent } from './components/cms/shop-list/add-edit-shop/add-edit-shop.component';
 import { ProductListComponent } from './components/cms/product-list/product-list.component';
 import { AddEditProductComponent } from './components/cms/product-list/add-edit-product/add-edit-product.component';
+import { ProductGroupComponent } from './components/common/product-group/product-group.component';
 
 
 
@@ -60,7 +61,8 @@ registerLocaleData(en);
     ShopListComponent,
     AddEditShopComponent,
     ProductListComponent,
-    AddEditProductComponent
+    AddEditProductComponent,
+    ProductGroupComponent
   ],
   imports: [
     BrowserModule,

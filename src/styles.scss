@@ -86,3 +86,36 @@ nz-date-picker{
   align-items: center;
   font-size: 16px;
 }
+
+// style for product list
+.product-container{
+    margin-top: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+// style for scroll bar
+ ::-webkit-scrollbar {
+    width: 0.2px;
+    opacity: 0.01;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: transparent; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: transparent; 
+  }
+
+  ::ng-deep nz-icon.anticon-star{
+    width: 0.75em;
+    height: 0.75em;
+  }

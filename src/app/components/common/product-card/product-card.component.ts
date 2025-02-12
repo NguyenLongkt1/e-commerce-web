@@ -13,6 +13,7 @@ export class ProductCardComponent implements OnInit{
   @Input() productName: any;
   @Input() productPrice: any;
   @Input() star:any;
+  @Input() readonlyStar:any;
 
   ngOnInit(): void {
     

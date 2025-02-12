@@ -1,11 +1,25 @@
 .card-item{
-    width: 150px;
-    height: 330px;
-    border: 1px solid #242424;
+    width: 200px;
+    height: 350px;
+    border: 1px solid #c6c6c6;
     border-radius: 5px;
+    .product-name{
+        font-size: 1.05rem;
+        margin-bottom: 0;
+        max-lines: 2;
+        text-overflow: ellipsis;
+    }
     .product-picture{
-        width: 150px;
-        height: 150px;
-        object-fit: contain;
+        width: 198px;
+        height: 200px;
+        object-fit: cover;
+    }
+    .sup-custom{
+        vertical-align: baseline;
+        font-size: 75%;
+    }
+    &:hover{
+        cursor: pointer;
+        box-shadow: 3px 1px 3px 1px #e6e6e6;
     }
 }

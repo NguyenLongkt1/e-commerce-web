@@ -5,7 +5,7 @@
                 <h5>Danh mục</h5>
                 <div class="text-button-grey" *ngFor="let item of lstCategory">
                     <div class="d-flex align-items-center gap-2">
-                        <img src="{{item.img}}" style="width: 32px;height: 36px;">
+                        <img src="{{item.thumbnail}}" style="width: 32px;height: 36px;">
                         <span class="h6">{{item.name}}</span>
                     </div>
                 </div>
@@ -13,11 +13,6 @@
         </div>
         <div class="col-md-9">
             <div class="rounded bg-white carousel-banner">
-                <!-- <nz-carousel nzAutoPlay>
-                    <div nz-carousel-content *ngFor="let item of lstBanner">
-                        <img src="{{item.img}}">
-                    </div>
-                </nz-carousel> -->
                 <nz-carousel nzAutoPlay>
                   @for (index of lstBanner; track index) {
                     <div nz-carousel-content>
@@ -29,10 +24,10 @@
             </div>
             <div class="rounded bg-white mt-3 default-style">
                 <div class="d-grid" [ngStyle]="{'grid-template-columns': 'repeat(' + lstCategory.length + ', 1fr)'}">
-                    <div *ngFor="let item of lstCategory">
+                    <div class="categories-item" *ngFor="let item of lstCategory">
                         <div class="d-flex justify-content-center flex-column text-center gap-2">
                             <div>
-                                <img src="/logo/sale-1.png" style="width: 50px;height: 50px;border-radius: 8px;">
+                                <img src="{{item.thumbnail}}" style="width: 50px;height: 50px;border-radius: 8px;">
                             </div>
                             <span class="h6">{{item.name}}</span>
                         </div>
@@ -40,9 +35,11 @@
                 </div>
                 
             </div>
-            <div class="rounded bg-white">
-                
-            </div>
+            
+            <app-product-group title="Bạn có thể thích" [lstProduct]="lstProduct"></app-product-group>
+
+            <app-product-group title="Thương hiệu nổi bật" [lstProduct]="lstProduct"></app-product-group>
+
         </div>
     </div>
     
