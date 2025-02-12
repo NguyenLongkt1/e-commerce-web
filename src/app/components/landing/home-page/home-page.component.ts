@@ -1,4 +1,6 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-home-page',
@@ -9,27 +11,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit{
 
-  constructor(){}
+  constructor(private httpClient:HttpClient){}
   lstCategory: any = [];
   lstBanner: any = [];
+  lstProduct: any = [];
+
+  async getListCategory(){
+    let param = new HttpParams();
+    this.httpClient.get(environment.apiUrl+'/categories/category/public/all',{
+      params: param
+    }).subscribe((e:any)=>{
+      this.lstCategory = e;
+    })
+  }
 
   ngOnInit(): void {
-    this.lstCategory = [
-      {id: 1,name: 'Nhà Sách Tiki', img: '/img/banner-deal.png'},
-      {id: 2,name: 'Nhà Cửa - Đời Sống', img: '/img/banner-deal.png'},
-      {id: 3,name: 'Điện Thoại - Máy Tính Bảng', img: '/img/banner-deal.png'},
-      {id: 4,name: 'Đồ chơi - Mẹ & Bé', img: '/img/banner-deal.png'},
-      {id: 5,name: 'Thiết Bị Số - Phụ Kiện Số', img: '/img/banner-deal.png'},
-      {id: 7,name: 'Điện Gia Dụng', img: '/img/banner-deal.png'},
-      {id: 8,name: 'Làm đẹp - Sức Khỏe', img: '/img/banner-deal.png'},
-      {id: 9,name: 'Ô Tô - Xe Máy - Xe Đạp', img: '/img/banner-deal.png'},
-      {id: 10,name: 'Thời Trang Nữ', img: '/img/banner-deal.png'},
-    ];
     this.lstBanner = [
       {id: 1,img: '/img/banner-deal.png'},
-      {id: 2,img: '/img/banner-deal.png'},
-      {id: 3,img: '/img/banner-deal.png'}
+      {id: 2,img: '/img/banner-deal2.png'},
+      {id: 3,img: '/img/banner-deal3.png'}
+    ];
+
+    this.lstProduct = [
+      {id: 1, firstImage: '/img/test.png', name: 'Sản phẩm 1', rating: 3.5, price: 100000},
+      {id: 2, firstImage: '/img/test.png', name: 'Sản phẩm 2', rating: 4.5, price: 120000},
+      {id: 3, firstImage: '/img/test.png', name: 'Sản phẩm 3', rating: 4, price: 60000},
+      {id: 4, firstImage: '/img/test.png', name: 'Sản phẩm 4', rating: 5, price: 72000},
+      {id: 5, firstImage: '/img/test.png', name: 'Sản phẩm 5', rating: 1, price: 990000},
+      {id: 6, firstImage: '/img/test.png', name: 'Sản phẩm 6', rating: 5, price: 500000},
     ]
+
+    this.getListCategory()
   }
 
 }

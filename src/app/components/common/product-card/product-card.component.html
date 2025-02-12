@@ -1,14 +1,18 @@
 <div>
     <div class="card-item">
         <img src="{{picture}}" class="product-picture" />
-        <div class="mt-2">
-            <h4>{{productName}}</h4>
+        <div class="p-2">
+            <div class="mt-2">
+                <p class="product-name">{{productName}}</p>
+            </div>
+            <div class="star-element" *ngIf="star">
+                <nz-rate *ngIf="readonlyStar" [ngModel]="star" nzAllowHalf nzDisabled></nz-rate>
+                <nz-rate *ngIf="!readonlyStar" [ngModel]="star" nzAllowHalf></nz-rate>
+            </div>
+            <div class="mt-1 d-flex">
+                <h5 class="text-danger text-bold">{{productPrice | currency : 'VND' : '' : '1.0-0'}} <sup class="text-danger text-bold sup-custom">₫</sup></h5>
+            </div> 
         </div>
-        <div class="star-element mt-2" *ngIf="star">
-            <nz-rate [ngModel]="star" nzAllowHalf></nz-rate>
-        </div>
-        <div class="mt-3">
-            <h3 class="text-danger text-bold">{{productPrice}}</h3>
-        </div>
+        
     </div>
 </div>
