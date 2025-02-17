@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment.development';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ProductModel } from '../../../models/product-model';
 
 @Component({
   selector: 'app-product-list',
@@ -19,16 +20,15 @@ export class ProductListComponent implements OnInit{
   public constructor(private formBuilder:FormBuilder, private httpClient:HttpClient,
     private router:Router,private modal: NzModalService,private message: NzMessageService){
     this.searchForm = this.formBuilder.group({
-      fullName: [''],
-      username: [''],
-      gender: ['']
+      name: [''],
+      code: ['']
     });
   }
   searchForm: FormGroup;
   checked = false;
   loading = false;
   indeterminate = false;
-  listOfData: readonly UserModel[] = [];
+  listOfData: readonly ProductModel[] = [];
   listOfCurrentPageData: readonly UserModel[] = [];
   setOfCheckedId = new Set<number>();
   actionType:any;
@@ -45,14 +45,13 @@ export class ProductListComponent implements OnInit{
 
   async doSearchData(){
     let param = new HttpParams()
-    .set('fullName', this.searchForm.get('fullName')?.value?.trim())
-    .set('username', this.searchForm.get('username')?.value?.trim())
-    .set('gender', this.searchForm.get('gender')?.value?.trim());
-    this.httpClient.get(environment.apiUrl+'/users/api/users',{
+    .set('name', this.searchForm.get('name')?.value?.trim())
+    .set('code', this.searchForm.get('code')?.value?.trim());
+    this.httpClient.get(environment.apiUrl+'/products/command/products',{
       params: param
     }).subscribe((e:any)=>{
       this.listOfData = e;
-      console.log('call search user')
+      console.log('call search product')
     })
   }
 
@@ -61,7 +60,7 @@ export class ProductListComponent implements OnInit{
       nzTitle: 'Xác nhận',
       nzContent: 'Bạn có muốn xóa người dùng này?',
       nzOnOk: () => {
-        this.httpClient.delete(environment.apiUrl+'/users/api/users/'+id).subscribe((e:any)=>{
+        this.httpClient.delete(environment.apiUrl+'/products/command/products/'+id).subscribe((e:any)=>{
           this.message.success('Xóa người dùng thành công');
           this.doSearchData();
         })
@@ -70,15 +69,15 @@ export class ProductListComponent implements OnInit{
   }
 
   routeToAddPage(){
-    this.router.navigate(["/cms/user",'add'])
+    this.router.navigate(["/cms/product",'add'])
   }
 
   routeToEditPage(id:any){
-    this.router.navigate(["/cms/user/edit/"+id])
+    this.router.navigate(["/cms/product/edit/"+id])
   }
 
   viewDetail(id:any){
-    this.router.navigate(["/cms/user/detail/"+id])
+    this.router.navigate(["/cms/product/detail/"+id])
   }
 
   ngOnInit(): void {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { FileModel } from '../../../models/file-model';
 
 @Component({
   selector: 'app-upload-image',
@@ -13,15 +14,16 @@ export class UploadImageComponent implements OnInit{
   }
 
   @Output() uploadEvent = new EventEmitter();
+  @Output() deleteFileEvent = new EventEmitter();
   @Input() filePath:any;
   @Input() isView:any;
   @Input() multiple:any;
-  @Input() lstFilePath:any;
+  @Input() lstFile:any;
   @Input() sizePx:any;
 
   choosenFile:any;
   previewUrl:any;
-  lstPreviewUrl:any=[];
+  lstPreviewUrl:FileModel[]=[];
   listChoosenFile:any=[];
 
   onChangeFile(event:any){
@@ -46,9 +48,14 @@ export class UploadImageComponent implements OnInit{
         var reader = new FileReader();
         reader.readAsDataURL(item);
         reader.onload = (event) => {
-          this.lstPreviewUrl.push(event.target!.result);
+          const file: FileModel = {
+            filePath: event.target!.result as string
+          };
+          this.lstPreviewUrl.push(file);
         }
       }
+      console.log("UPLOAD MULTIPLE FILES: ", this.lstPreviewUrl);
+      console.log("tuananh: ", this.listChoosenFile);
       this.uploadEvent.emit(this.listChoosenFile);
     }
   }
@@ -59,6 +66,12 @@ export class UploadImageComponent implements OnInit{
   }
 
   clearImgByIndex(index:any){
+    var removedId = this.lstPreviewUrl[index].id;
+    console.log("Id xóa: ", removedId);
+    if (removedId !== undefined) {
+      this.deleteFileEvent.emit(removedId);
+    }
+
     this.lstPreviewUrl.splice(index, 1);
     this.listChoosenFile.splice(index,1);
   }
@@ -80,8 +93,8 @@ export class UploadImageComponent implements OnInit{
       }
     }
 
-    if (changes['lstFilePath'] && changes['lstFilePath'].currentValue) {
-      this.lstPreviewUrl = this.lstFilePath;
+    if (changes['lstFile'] && changes['lstFile'].currentValue) {
+      this.lstPreviewUrl = this.lstFile;
     }
   }
 }

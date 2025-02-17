@@ -44,7 +44,7 @@ export class CategoryListComponent implements OnInit{
 
   async doSearchData(){
     let param = new HttpParams()
-    .set('name', encodeURIComponent(this.searchForm.get('name')?.value?.trim()));
+    .set('name', this.searchForm.get('name')?.value?.trim());
     this.httpClient.get(environment.apiUrl+'/categories/category',{
       params: param
     }).subscribe((e:any)=>{
