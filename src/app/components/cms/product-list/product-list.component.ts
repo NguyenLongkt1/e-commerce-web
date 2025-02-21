@@ -21,7 +21,9 @@ export class ProductListComponent implements OnInit{
     private router:Router,private modal: NzModalService,private message: NzMessageService){
     this.searchForm = this.formBuilder.group({
       name: [''],
-      code: ['']
+      code: [''],
+      categoryId: [''],
+      shopId: ['']
     });
   }
   searchForm: FormGroup;
@@ -33,20 +35,15 @@ export class ProductListComponent implements OnInit{
   setOfCheckedId = new Set<number>();
   actionType:any;
   confirmModal?: NzModalRef;
-  onCurrentPageDataChange(ev:any){
+  lstCategory:any[] = [];
+  lstShop:any[] = [];
 
-  }
-  onAllChecked(ev:any){
-
-  }
-  onItemChecked(id:number,ev:any){
-
-  }
-
-  async doSearchData(){
+  doSearchData(){
     let param = new HttpParams()
     .set('name', this.searchForm.get('name')?.value?.trim())
-    .set('code', this.searchForm.get('code')?.value?.trim());
+    .set('code', this.searchForm.get('code')?.value?.trim())
+    .set('categoryId', this.searchForm.get('categoryId')?.value)
+    .set('shopId', this.searchForm.get('shopId')?.value);
     this.httpClient.get(environment.apiUrl+'/products/command/products',{
       params: param
     }).subscribe((e:any)=>{
@@ -81,7 +78,37 @@ export class ProductListComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.getCategoryList();
+    this.getShopList();
     this.doSearchData();
+  }
+
+  getCategoryList(){
+    this.httpClient.get(environment.apiUrl+'/categories/category').subscribe((e:any)=>{
+        console.log('retrieve categories: ',e);
+        this.lstCategory = e;
+    })
+  }
+
+  getShopList(){
+    this.httpClient.get(environment.apiUrl+'/shops/api/shops').subscribe((e:any)=>{
+        console.log('retrieve shops: ',e);
+        this.lstShop = e.content;
+    })
+  }
+
+  onCategoryChange(event: any){
+    console.log("onCategoryChange ", event)
+    if (event === null) {
+      this.searchForm.get("categoryId")?.setValue('');
+    }
+  }
+
+  onShopChange(event: any){
+    console.log("onShopChange ", event)
+    if (event === null) {
+      this.searchForm.get("shopId")?.setValue('');
+    }
   }
 
 }

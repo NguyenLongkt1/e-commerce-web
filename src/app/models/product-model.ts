@@ -6,6 +6,8 @@ export class ProductModel{
     rating? = '';
     price? = '';
     categoryId? = '';
+    categoryName? = '';
     shopId? = '';
+    shopName? = '';
   }
   

@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <form [formGroup]="searchForm">
       <div class="row m-2">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <input
             type="text"
             nz-input
@@ -10,13 +10,45 @@
             placeholder="Tên sản phẩm"
           />
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <input
             type="text"
             nz-input
             formControlName="code"
             placeholder="Mã sản phẩm"
           />
+        </div>
+        <div class="col-md-3">
+          <nz-select
+            formControlName="categoryId"
+            nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Danh mục"
+            (ngModelChange)="onCategoryChange($event)"
+          >
+            <nz-option
+              [nzValue]="category.id"
+              [nzLabel]="category.name"
+              *ngFor="let category of lstCategory"
+            ></nz-option>
+          </nz-select>
+        </div>
+        <div class="col-md-3">
+          <nz-select
+            formControlName="shopId"
+            nz-select
+            nzShowSearch
+            nzAllowClear
+            nzPlaceHolder="Gian hàng"
+            (ngModelChange)="onShopChange($event)"
+          >
+            <nz-option
+              [nzValue]="shop.id"
+              [nzLabel]="shop.shopName"
+              *ngFor="let shop of lstShop"
+            ></nz-option>
+          </nz-select>
         </div>
       </div>
       <div class="row justify-content-center">
@@ -46,6 +78,9 @@
           <th>Tên sản phẩm</th>
           <th>Mã sản phẩm</th>
           <th>Giá</th>
+          <th>Danh mục</th>
+          <th>Gian hàng</th>
+          <th>Đánh giá</th>
           <th>Thao tác</th>
         </tr>
       </thead>
@@ -55,6 +90,9 @@
           <td>{{ data.name }}</td>
           <td>{{ data.code }}</td>
           <td>{{ data.price }}</td>
+          <td>{{ data.categoryName }}</td>
+          <td>{{ data.shopName }}</td>
+          <td>{{ data.rating }}</td>
           <td>
             <nz-icon
               (click)="viewDetail(data.id)"

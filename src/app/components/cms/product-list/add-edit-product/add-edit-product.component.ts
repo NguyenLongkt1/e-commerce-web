@@ -31,7 +31,9 @@ export class AddEditProductComponent implements OnInit {
       code: ['',Validators.required],
       description: [''],
       price: ['',Validators.required],
-      categoryId: ['',Validators.required]
+      categoryId: ['',Validators.required],
+      shopId: ['',Validators.required],
+      rating: [''],
     })
   }
   isView = false;
@@ -40,7 +42,11 @@ export class AddEditProductComponent implements OnInit {
   confirmModal?: NzModalRef;
   choosenFiles:any = [];
   lstFile:any;
-  lstRemovedFileId:any = []
+  lstRemovedFileId:any = [];
+  lstCategory:any[] = [];
+  lstShop:any[] = [];
+  categoryName:any;
+  shopName:any;
 
   setParam(form:FormGroup){
     let params: { [key: string]: any } = {}; 
@@ -56,6 +62,8 @@ export class AddEditProductComponent implements OnInit {
       params['id']=this.id;
     }
     params['lstRemovedFileId']=this.lstRemovedFileId;
+    params['categoryName']=this.categoryName;
+    params['shopName']=this.shopName;
     return params;
   }
   
@@ -104,6 +112,20 @@ export class AddEditProductComponent implements OnInit {
     })
   }
 
+  getCategoryList(){
+    this.httpClient.get(environment.apiUrl+'/categories/category').subscribe((e:any)=>{
+        console.log('retrieve categories: ',e);
+        this.lstCategory = e;
+    })
+  }
+
+  getShopList(){
+    this.httpClient.get(environment.apiUrl+'/shops/api/shops').subscribe((e:any)=>{
+        console.log('retrieve shops: ',e);
+        this.lstShop = e.content;
+    })
+  }
+
   doChangeFile(event:any){
     console.log('fileChange: ',event);
     this.choosenFiles = event;
@@ -114,7 +136,19 @@ export class AddEditProductComponent implements OnInit {
     this.lstRemovedFileId.push(event);
   }
 
+  onShopChange(id: any){
+    console.log('shopChange: ',id);
+    this.shopName = this.lstShop.find(shop => shop.id === id)?.shopName;
+  }
+
+  onCategoryChange(id: any){
+    console.log('categoryChange: ',id);
+    this.categoryName = this.lstCategory.find(category => category.id === id)?.name;
+  }
+
   ngOnInit(): void {
+    this.getCategoryList();
+    this.getShopList();
     if(this.id){
       this.retrieveProduct();
     }

@@ -48,7 +48,7 @@
               />
             </div>
             <div class="col-md-4">
-              <label>Danh mục</label>
+              <label>Danh mục <span class="text-danger">*</span></label>
               <nz-select
                 [nzDisabled]="isView"
                 formControlName="categoryId"
@@ -56,10 +56,41 @@
                 nzShowSearch
                 nzAllowClear
                 nzPlaceHolder="Danh mục"
+                (ngModelChange)="onCategoryChange($event)"
               >
-                <nz-option [nzValue]="1" nzLabel="Đồ gia dụng"></nz-option>
-                <nz-option [nzValue]="0" nzLabel="Sách"></nz-option>
+                <nz-option
+                  [nzValue]="category.id"
+                  [nzLabel]="category.name"
+                  *ngFor="let category of lstCategory"
+                ></nz-option>
               </nz-select>
+            </div>
+            <div class="col-md-4">
+              <label>Gian hàng <span class="text-danger">*</span></label>
+              <nz-select
+                [nzDisabled]="isView"
+                formControlName="shopId"
+                nz-select
+                nzShowSearch
+                nzAllowClear
+                nzPlaceHolder="Gian hàng"
+                (ngModelChange)="onShopChange($event)"
+              >
+                <nz-option
+                  [nzValue]="shop.id"
+                  [nzLabel]="shop.shopName"
+                  *ngFor="let shop of lstShop"
+                ></nz-option>
+              </nz-select>
+            </div>
+            <div class="col-md-4">
+              <label>Đánh giá</label>
+              <input
+                class="disabled-input"
+                type="number"
+                nz-input
+                formControlName="rating"
+              />
             </div>
           </div>
         </div>
