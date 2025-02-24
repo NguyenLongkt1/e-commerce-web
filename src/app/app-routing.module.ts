@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./routing/landing-routing.module').then(m => m.LandingRoutingModule)
+    redirectTo: '/landing'
   },
   {
     path: 'landing',
