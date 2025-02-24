@@ -1,0 +1,47 @@
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../environments/environment.development';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-product-detail',
+  standalone: false,
+  
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss'
+})
+export class ProductDetailComponent implements OnInit{
+
+  constructor(private activatedRoute: ActivatedRoute, private httpClient:HttpClient,
+        private formBuilder:FormBuilder){
+    this.activatedRoute.params.subscribe(params=>{
+      if('id' in params){
+        this.id = params['id'];
+      }
+    });
+    this.formRating = this.formBuilder.group({
+
+    });  
+  }
+
+  productDetail:any;
+  choosenImg:any;
+  id:any;
+  lstFile:any = [];
+  formRating:FormGroup;
+
+  async getProductDetail(){
+    this.httpClient.get(environment.apiUrl+'/products/command/products/'+this.id).subscribe((e:any)=>{
+      this.productDetail = e;
+      console.log('productDetail: ',this.productDetail)
+    })
+  }
+
+  ngOnInit(): void {
+    this.choosenImg = '/img/test.png'
+    this.lstFile = [{id: 1},{id: 2},{id: 3},{id: 4},{id: 5},{id: 6},{id: 7}];
+    this.getProductDetail();
+  }
+
+}

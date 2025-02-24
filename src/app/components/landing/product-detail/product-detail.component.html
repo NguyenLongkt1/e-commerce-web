@@ -1,0 +1,60 @@
+<div class="col-md-12 d-flex justify-content-center">
+    <div class="col-md-10">
+        <div class="d-flex gap-3 detail-container">
+            <div class="col-md-3 product-container">
+                <div class="space">
+                    <div class="product-img">
+                        <div *ngIf="productDetail.lstFile">
+                            <img src="{{productDetail.lstFile[0].filePath}}" class="show-img"/>
+                        </div>
+                        <div *ngIf="!productDetail.lstFile">
+                            <img src="{{choosenImg}}" class="show-img"/>
+                        </div>         
+                    </div>
+                    <div class="mt-2">
+                        <div class="d-flex gap-2 flex-wrap">
+                            <div *ngIf="productDetail.lstFile">
+                               <div *ngFor="let item of productDetail.lstFile">
+                                 <img src="{{item.filePath}}" class="show-img-small"/>
+                               </div> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 product-container">
+                <div class="column-data">
+                    <div class="space">
+                        <h4>{{productDetail.name}}</h4>
+                        <div class="d-flex gap-2 align-items-center">
+                            <h6 style="height: 30px;line-height: 35px;">
+                                {{productDetail.rating}}
+                            </h6>
+                            <form>
+                                <nz-rate [(ngModel)]="productDetail.rating" name="rating" nzAllowHalf nzDisabled></nz-rate>
+                            </form>
+                        </div>
+                        <div class="mt-1 d-flex">
+                            <h4 class="text-danger text-bold">{{productDetail.price | currency : 'VND' : '' : '1.0-0'}} <sup *ngIf="productDetail.price" class="text-danger text-bold sup-custom">₫</sup></h4>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 product-container">
+                <div class="space">
+                    <div class="d-flex justify-content-between align-items-center shop-info">
+                        <div>
+                            <h5>{{productDetail.shopName}}</h5>
+                        </div>
+                        <div>
+                            <div class="border rounded d-flex justify-content-center align-items-center">
+                                <nz-icon nzType="message" nzTheme="outline" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

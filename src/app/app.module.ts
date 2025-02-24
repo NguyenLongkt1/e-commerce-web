@@ -39,8 +39,7 @@ import { AddEditShopComponent } from './components/cms/shop-list/add-edit-shop/a
 import { ProductListComponent } from './components/cms/product-list/product-list.component';
 import { AddEditProductComponent } from './components/cms/product-list/add-edit-product/add-edit-product.component';
 import { ProductGroupComponent } from './components/common/product-group/product-group.component';
-
-
+import { ProductDetailComponent } from './components/landing/product-detail/product-detail.component';
 
 registerLocaleData(en);
 
@@ -62,7 +61,8 @@ registerLocaleData(en);
     AddEditShopComponent,
     ProductListComponent,
     AddEditProductComponent,
-    ProductGroupComponent
+    ProductGroupComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +95,9 @@ registerLocaleData(en);
     ReactiveFormsModule,
     NzTableModule,
     NzSelectModule,
-    NzUploadModule
+    NzUploadModule,
+    NzRateModule,
+    NzIconModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),
