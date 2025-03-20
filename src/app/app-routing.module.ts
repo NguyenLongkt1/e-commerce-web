@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { CmsRoutingModule } from './routing/cms-routing.module';
 import { LandingModule } from './components/landing/landing.module';
 
@@ -23,7 +23,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{
+      preloadingStrategy: PreloadAllModules
+    }),
     CmsRoutingModule,
     LandingModule
   ],

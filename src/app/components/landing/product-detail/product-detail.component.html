@@ -44,9 +44,9 @@
                 <div class="mt-3 column-data">
                     <div class="space">
                         <h5>Mô tả sản phẩm</h5>
-                        <p class="content" [innerHtml]="productDetail.description | sanitizerHtml">
+                        <p class="content" #contentElement [innerHtml]="productDetail.description | sanitizerHtml">
                         </p>
-                        <span id="toggle-content" (click)="expandData()" class="d-flex justify-content-center">{{textContent}}</span>
+                        <span *ngIf="showToggle" id="toggle-content" (click)="expandData()" class="d-flex justify-content-center">{{textContent}}</span>
                     </div>
                 </div>
             </div>

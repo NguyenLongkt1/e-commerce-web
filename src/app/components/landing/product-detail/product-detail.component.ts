@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment.development';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -25,6 +25,9 @@ export class ProductDetailComponent implements OnInit{
     });  
   }
 
+  @ViewChild('contentElement') contentElement!: ElementRef;
+  showToggle: boolean = false;
+
   productDetail:any;
   choosenImg:any;
   id:any;
@@ -49,6 +52,18 @@ export class ProductDetailComponent implements OnInit{
     if(container != null){
       container.classList.toggle("expanded");
       this.textContent = container.classList.contains("expanded") ? "Thu gọn" : "Xem thêm";
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // Kiểm tra kích thước của phần tử sau khi view được khởi tạo
+    const contentHeight = this.contentElement.nativeElement.offsetHeight;
+
+    // Kiểm tra xem phần tử có chiều cao vượt quá 300px không
+    if (contentHeight > 300) {
+      this.showToggle = true; 
+    } else {
+      this.showToggle = false;
     }
   }
 
