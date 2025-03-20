@@ -10,18 +10,15 @@ const routes: Routes = [
       component: LandingComponent,
       children: [
         {
-          path: '',
-          component: HomePageComponent
-        },
-        {
-          path: 'home',
-          component: HomePageComponent
-        },
-        {
           path: 'product-detail/:id',
           component: ProductDetailComponent,
           pathMatch: 'full'
-        }
+        },
+        {
+          path: '',
+          component: HomePageComponent,
+          pathMatch: 'full'
+        },
       ]
     }
 ];
