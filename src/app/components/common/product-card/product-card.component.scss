@@ -2,7 +2,7 @@
     width: 200px;
     height: 350px;
     border: 1px solid #c6c6c6;
-    border-radius: 5px;
+    border-radius: 10px;
     .product-name{
         font-size: 1.05rem;
         margin-bottom: 0;
@@ -13,6 +13,7 @@
         width: 198px;
         height: 200px;
         object-fit: cover;
+        border-radius: 10px;
     }
     .sup-custom{
         vertical-align: baseline;

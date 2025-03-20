@@ -30,12 +30,26 @@ export class ProductDetailComponent implements OnInit{
   id:any;
   lstFile:any = [];
   formRating:FormGroup;
+  buyValue = 1;
+  textContent:any="Xem thêm";
 
   async getProductDetail(){
     this.httpClient.get(environment.apiUrl+'/products/command/products/'+this.id).subscribe((e:any)=>{
       this.productDetail = e;
       console.log('productDetail: ',this.productDetail)
     })
+  }
+
+  setBuyValue(value:any){
+    this.buyValue = value;
+  }
+  expandData(){
+    let container = document.querySelector(".content");
+    console.log('test expand: ',container)
+    if(container != null){
+      container.classList.toggle("expanded");
+      this.textContent = container.classList.contains("expanded") ? "Thu gọn" : "Xem thêm";
+    }
   }
 
   ngOnInit(): void {

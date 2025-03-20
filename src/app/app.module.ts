@@ -40,7 +40,10 @@ import { ProductListComponent } from './components/cms/product-list/product-list
 import { AddEditProductComponent } from './components/cms/product-list/add-edit-product/add-edit-product.component';
 import { ProductGroupComponent } from './components/common/product-group/product-group.component';
 import { ProductDetailComponent } from './components/landing/product-detail/product-detail.component';
-
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { SanitizerHtmlPipe } from './pipe/sanitizer-html-pipe';
+import { InputNumberSelectorComponent } from './components/common/input-number-selector/input-number-selector.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 registerLocaleData(en);
 
 @NgModule({
@@ -62,7 +65,9 @@ registerLocaleData(en);
     ProductListComponent,
     AddEditProductComponent,
     ProductGroupComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    SanitizerHtmlPipe,
+    InputNumberSelectorComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +86,9 @@ registerLocaleData(en);
     NzSelectModule,
     NzDatePickerModule,
     NzUploadModule,
-    NzRateModule
+    NzRateModule,
+    CKEditorModule,
+    NzInputNumberModule,
   ],
   exports: [
     FormsModule,
@@ -97,7 +104,9 @@ registerLocaleData(en);
     NzSelectModule,
     NzUploadModule,
     NzRateModule,
-    NzIconModule
+    NzIconModule,
+    CKEditorModule,
+    NzInputNumberModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),

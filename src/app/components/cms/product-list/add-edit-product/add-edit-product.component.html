@@ -27,7 +27,7 @@
                 placeholder="Mã sản phẩm "
               />
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
               <label>Mô tả sản phẩm <span class="text-danger">*</span></label>
               <input
                 [ngClass]="isView ? 'disabled-input' : ''"
@@ -36,7 +36,7 @@
                 formControlName="description"
                 placeholder="Mô tả sản phẩm "
               />
-            </div>
+            </div> -->
             <div class="col-md-4">
               <label>Giá sản phẩm <span class="text-danger">*</span></label>
               <input
@@ -91,6 +91,11 @@
                 nz-input
                 formControlName="rating"
               />
+            </div>
+
+            <div class="col-md-12">
+              <label>Mô tả sản phẩm<span class="text-danger">*</span></label>
+              <ckeditor [ngClass]="isView ? 'disabled-input' : ''" [editor]="Editor" [config]="config" formControlName="description"></ckeditor>
             </div>
           </div>
         </div>

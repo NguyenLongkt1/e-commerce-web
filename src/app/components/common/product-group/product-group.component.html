@@ -2,7 +2,7 @@
     <h4 class="pt-3 ps-3 pe-3">{{title}}</h4>
     <div class="p-3 d-flex gap-2 overflow-scroll">
         @for (index of lstProduct; track index) {
-            <app-product-card class="me-1" [picture]="index.firstImage" 
+            <app-product-card class="me-1" [picture]="index.lstFile[0].filePath" 
                 [productName]="index.name" 
                 [productPrice]="index.price"
                 [productId]="index.id"

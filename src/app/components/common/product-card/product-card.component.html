@@ -3,7 +3,7 @@
         <img src="{{picture}}" class="product-picture" />
         <div class="p-2">
             <div class="mt-2">
-                <p class="product-name">{{productName}}</p>
+                <p class="product-name text-truncate">{{productName}}</p>
             </div>
             <div class="star-element" *ngIf="star">
                 <nz-rate *ngIf="readonlyStar" [ngModel]="star" nzAllowHalf nzDisabled></nz-rate>

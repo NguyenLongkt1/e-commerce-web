@@ -1,7 +1,7 @@
 <div class="col-md-12 d-flex justify-content-center">
     <div class="col-md-10">
         <div class="d-flex gap-3 detail-container">
-            <div class="col-md-3 product-container">
+            <div class="col-md-3 product-container height-70">
                 <div class="space">
                     <div class="product-img">
                         <div *ngIf="productDetail.lstFile">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 product-container">
+            <div class="col-md-6 product-container product-detail">
                 <div class="column-data">
                     <div class="space">
                         <h4>{{productDetail.name}}</h4>
@@ -40,8 +40,17 @@
                         </div> 
                     </div>
                 </div>
+
+                <div class="mt-3 column-data">
+                    <div class="space">
+                        <h5>Mô tả sản phẩm</h5>
+                        <p class="content" [innerHtml]="productDetail.description | sanitizerHtml">
+                        </p>
+                        <span id="toggle-content" (click)="expandData()" class="d-flex justify-content-center">{{textContent}}</span>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3 product-container">
+            <div class="col-md-3 product-container height-70">
                 <div class="space">
                     <div class="d-flex justify-content-between align-items-center shop-info">
                         <div>
@@ -52,6 +61,32 @@
                                 <nz-icon nzType="message" nzTheme="outline" />
                             </div>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="mt-2">
+                        <h6>Số lượng</h6>
+                        <div class="mt-2">
+                            <app-input-number-selector 
+                                [minValue]="1" 
+                                [maxValue]="10"
+                                (selectedValue)="setBuyValue($event)"
+                            ></app-input-number-selector>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <h6>Tạm tính</h6>
+                        <div class="mt-2">
+                            <h5>{{(productDetail.price * buyValue) | currency : 'VND' : '' : '1.0-0'}} <sup *ngIf="productDetail.price" class="text-bold sup-custom">₫</sup></h5>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <div class="mt-2">
+                            <button nz-button nzDanger nzType="primary" style="width: 100%;">Mua ngay</button>
+                        </div>
+                        <div class="mt-2">
+                            <button nz-button style="width: 100%;">Thêm vào giỏ hàng</button>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

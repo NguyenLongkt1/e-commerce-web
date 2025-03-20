@@ -1,8 +1,15 @@
 @import '../../../../styles.scss';
 
 .detail-container{
+    .height-70{
+        height: 70%;
+    }
     .product-container{
         .space{
+            .thumbnail{
+                width: 40px;
+                height: 40px;
+            }
             h4,h5,h6{
                 margin-bottom: 0 !important;
             }
@@ -38,6 +45,27 @@
                     height: 32px;
                 }
             }
+        }
+    }
+
+    .product-detail{
+        background-color: #efefef !important;
+        margin-bottom: 15px;
+        .column-data{
+            background-color: #fff;
+            border-radius: 8px;
+            .content{
+                max-height: 300px;
+                overflow: hidden;
+                transition: max-height 0.3s ease-in-out;
+            }
+            #toggle-content{
+                color: #3abfda;
+                cursor: pointer;
+            }
+        }
+        .content.expanded{
+            max-height: unset !important;
         }
     }
 }

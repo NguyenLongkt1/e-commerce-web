@@ -1,0 +1,21 @@
+.customSizeBtn{
+    scale: 0.79;
+}
+.custom-input-number{
+    width: 38px;
+}
+.ant-input-number-input{
+    text-align: center;
+}
+.disable-btn{
+    background-color: #f8f8f8;
+    pointer-events: none;
+    outline: none;
+    nz-icon{
+        background-color: #f8f8f8 !important;
+        color: grey;
+    }
+}
+.ant-input-number-input{
+    padding-bottom: 3px;
+}

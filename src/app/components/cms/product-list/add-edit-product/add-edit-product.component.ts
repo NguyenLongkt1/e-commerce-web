@@ -6,7 +6,7 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../../environments/environment.development';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { ClassicEditor, Bold, Essentials, Italic, Paragraph, Heading, List, FontSize, FontColor, Image, ImageUpload, ImageInsert } from 'ckeditor5';
 @Component({
   selector: 'app-add-edit-product',
   standalone: false,
@@ -146,6 +146,13 @@ export class AddEditProductComponent implements OnInit {
     this.categoryName = this.lstCategory.find(category => category.id === id)?.name;
   }
 
+  public Editor = ClassicEditor;
+  public config = {
+    licenseKey: 'GPL',
+    plugins: [ Essentials, Paragraph, Bold, Italic, Heading, List, FontSize, FontColor, Image, ImageUpload, ImageInsert ],
+    toolbar: [ 'undo', 'redo', '|', 'heading', 'list' , 'bold', 'italic', 'fontsize', 'fontcolor', '|' , 'ImageInsert' ]
+  }
+  
   ngOnInit(): void {
     this.getCategoryList();
     this.getShopList();
