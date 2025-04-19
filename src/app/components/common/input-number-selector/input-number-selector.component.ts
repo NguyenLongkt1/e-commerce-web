@@ -18,6 +18,7 @@ export class InputNumberSelectorComponent implements OnInit{
 
   @Input() minValue:any;
   @Input() maxValue:any;
+  @Input() allowRemoveProduct:any;
   @Output() selectedValue:any = new EventEmitter();
   chooseValue = 1;
   sendValue(event:any){
@@ -31,7 +32,7 @@ export class InputNumberSelectorComponent implements OnInit{
   }
 
   reduceValue(){
-    if(this.chooseValue > 1 ){
+    if((!this.allowRemoveProduct && this.chooseValue > 1) || (this.allowRemoveProduct && this.chooseValue > 0) ){
       this.chooseValue--;
     }
   }
