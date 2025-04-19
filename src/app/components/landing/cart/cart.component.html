@@ -1,0 +1,95 @@
+<div class="col-md-12 body-page">
+    <div class="col-md-10" style="margin: 0 auto;">
+        <h4 class="pt-4">Giỏ hàng</h4>
+    </div>
+    <div *ngIf="listItem.length == 0" class="pb-2">
+        <div class="col-md-10 cart-container cart-empty">
+            <div class="mb-2">
+                <img src="/img/cart-empty.png" style="width: 150px;height: 150px;" alt="cart-empty.png">
+            </div>
+            <div>
+                <h6 class="text-center">Giỏ hàng trống</h6>
+                <p class="text-center">Bạn tham khảo thêm các sản phẩm được Tiki gợi ý bên dưới nhé!</p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="listItem.length != 0" class="pb-2 d-flex gap-2 p-2">
+        <div class="col-md-9" style="margin: 0 auto;">
+            <nz-table
+                #rowSelectionTable
+                nzShowSizeChanger
+                [nzData]="listItem"
+                class="table-cart"
+                nzShowPagination="false"
+                >
+                <thead>
+                    <tr>
+                        <th
+                            [(nzChecked)]="checked"
+                            [nzIndeterminate]="indeterminate"
+                            (nzCheckedChange)="onAllChecked($event)"
+                            width="25px"
+                        ></th>
+                        <th width="42%">Tất cả sản phẩm</th>
+                        <th width="17%">Đơn giá</th>
+                        <th width="17%">Số lượng</th>
+                        <th width="17%">Thành tiền</th>
+                        <th><nz-icon nzType="delete" style="color: red" nzTheme="outline" /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (data of rowSelectionTable.data; track data) {
+                    <tr>
+                        <td [nzChecked]="setOfCheckedId.has(data.id ?? 1)" (nzCheckedChange)="onItemChecked(data.id ?? 1, $event)"></td>
+                        <td>
+                            {{ data.name }}
+                        </td>
+                        <td class="price-style">{{ data.price | currency : 'VND' : '' : '1.0-0' }}
+                            <sup *ngIf="data.price" class="text-bold sup-custom">₫</sup>
+                        </td>
+                        <!-- <td>{{ data.address }}</td> -->
+                        <td>
+                            <app-input-number-selector 
+                                [minValue]="0" 
+                                [maxValue]="10"
+                                [allowRemoveProduct]="true"
+                                (selectedValue)="setBuyValue($event)"
+                            ></app-input-number-selector>
+                        </td>
+                        <td class="price-style">{{ (data.price ? data.price * 1 : 0) | currency : 'VND' : '' : '1.0-0' }}
+                            <sup *ngIf="data.price" class="text-bold sup-custom">₫</sup>
+                        </td>
+                        <td>
+                            <nz-icon (click)="doDeleteItem(data.id)" nzType="delete" nzTheme="outline" style="color: red" class="nz-icon-action"/>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                </nz-table>
+        </div>
+        <div class="col-md-3" style="padding: 0 10px;">
+            <div class="space">
+                <div class="mt-2">
+                    <h6>Tạm tính</h6>
+                    <div class="mt-2">
+                        <h5 class="price-style">{{0 | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
+                    </div>
+                </div>
+                <hr>
+                <div class="mt-2 d-flex">
+                    <div class="col-md-6">
+                        <h6>Tổng tiền thanh toán</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="price-style" style="text-align: right;">{{0 | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div class="mt-2">
+                        <button nz-button nzDanger nzType="primary" style="width: 100%;">Mua hàng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

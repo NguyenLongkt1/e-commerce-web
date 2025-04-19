@@ -1,0 +1,19 @@
+.body-page{
+    height: 100%;
+}
+.cart-container{
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 5px auto;
+}
+.cart-empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.space{
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+}

@@ -9,6 +9,8 @@ import { AddEditShopComponent } from "../components/cms/shop-list/add-edit-shop/
 import { ShopListComponent } from "../components/cms/shop-list/shop-list.component";
 import { ProductListComponent } from "../components/cms/product-list/product-list.component";
 import { AddEditProductComponent } from "../components/cms/product-list/add-edit-product/add-edit-product.component";
+import { CartListComponent } from "../components/cms/cart-list/cart-list.component";
+import { AddEditCartComponent } from "../components/cms/cart-list/add-edit-cart/add-edit-cart.component";
 
 const routes: Routes = [
     {
@@ -104,6 +106,29 @@ const routes: Routes = [
             {
                 path: '',
                 component: ProductListComponent
+            }
+          ]
+        },
+        {
+          path: 'cart',
+          children: [
+            {
+              path: 'detail/:id',
+              pathMatch: 'full',
+              component: AddEditCartComponent
+            },
+            {
+                path: 'edit/:id',
+                pathMatch: 'full',
+                component: AddEditCartComponent
+            },
+            {
+                path: 'add',
+                component: AddEditCartComponent
+            },
+            {
+                path: '',
+                component: CartListComponent
             }
           ]
         },
