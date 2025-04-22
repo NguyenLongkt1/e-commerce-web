@@ -1,0 +1,197 @@
+<div class="col-md-12 p-1">
+    <form [formGroup]="addEditForm">
+      <div class="col-md-12 mb-5">
+        <h2>Thêm mới giỏ hàng</h2>
+      </div>
+      <div class="content">
+        <div class="col-md-12 d-flex row-gap-1">
+          <div class="col-md-12">
+            <div class="row row-gap-3">
+              <div class="col-md-6">
+                <label>Khách hàng <span class="text-danger">*</span></label>
+                <nz-select
+                    [nzDisabled]="isView"
+                    formControlName="userId"
+                    nz-select
+                    nzShowSearch
+                    nzAllowClear
+                    nzPlaceHolder="Khách hàng"
+                    (ngModelChange)="onCustomerChange($event)"
+                >
+                    <nz-option
+                        [nzValue]="customer.id"
+                        [nzLabel]="customer.name"
+                        *ngFor="let customer of listCustomer"
+                    ></nz-option>
+                </nz-select>
+              </div>
+              <div class="col-md-6">
+                <label>Tổng tiền <span class="text-danger">*</span></label>
+                <input
+                  class="disabled-input"
+                  type="text"
+                  nz-input
+                  formControlName="code"
+                  placeholder="Tổng tiền"
+                />
+              </div>
+            </div>
+            <div class="mt-2">
+              <button
+                nz-button
+                nzType="primary"
+                class="me-2"
+                (click)="addProduct()"
+              >
+                Thêm sản phẩm
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <nz-table #basicTable [nzData]="listProductSelected">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Mã sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of basicTable.data; track data) {
+              <tr>
+                <td>
+                  {{ data.name }}
+                </td>
+                <td>
+                  {{ data.code }}
+                </td>
+                <td>
+                  {{ data.amount }}
+                </td>
+                <td>{{ data.amount * data.price }}</td>
+                <td>
+                  <nz-icon
+                    (click)="deleteData(data.id)"
+                    nzType="delete"
+                    nzTheme="outline"
+                    style="color: red"
+                    class="nz-icon-action"
+                  />
+                </td>
+              </tr>
+              }
+            </tbody>
+          </nz-table>
+        </div>
+        <div class="row justify-content-center mt-4">
+          <div class="col-md-3">
+            <button
+              *ngIf="!id && !isView"
+              nz-button
+              nzType="primary"
+              class="me-2"
+              (click)="doCreateOrUpdateCart()"
+            >
+              <nz-icon nzType="plus" />
+              Thêm mới
+            </button>
+            <button
+              *ngIf="id && !isView"
+              nz-button
+              nzType="primary"
+              class="me-2"
+              (click)="doCreateOrUpdateCart()"
+            >
+              <nz-icon nzType="edit" />
+              Cập nhật
+            </button>
+            <button nz-button nzType="default" class="me-1" (click)="back()">
+              <nz-icon nzType="arrow-left" nzTheme="outline" />
+              Quay lại
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <nz-modal
+      [(nzVisible)]="isShowModal"
+      nzTitle="Chọn sản phẩm"
+      nzCentered
+      nzWidth="1280px"
+      (nzOnCancel)="onCancelModal()"
+      (nzOnOk)="onOkModal()"
+    >
+      <ng-container *nzModalContent>
+        <div class="col-md-12 mt-2">
+          <div class="col-md-4">
+            <label>Gian hàng <span class="text-danger">*</span></label>
+            <nz-select
+              [nzDisabled]="isView"
+              nz-select
+              [ngModel]="shopId"
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="Gian hàng"
+              (ngModelChange)="onShopChange($event)"
+            >
+              <nz-option
+                [nzValue]="shop.id"
+                [nzLabel]="shop.shopName"
+                *ngFor="let shop of lstShop"
+              ></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div class="col-md-12 mt-2">
+          <nz-table #basicTable [nzData]="listProductInModal">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Mã sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of basicTable.data; track data) {
+              <tr>
+                <td>
+                  <img
+                    [src]="data.thumbnail"
+                    alt="Thumbnail"
+                    width="30"
+                    height="30"
+                    style="margin-right: 5px"
+                  />
+                  {{ data.name }}
+                </td>
+                <td>
+                  {{ data.code }}
+                </td>
+                <td>
+                  {{ data.amount }}
+                </td>
+                <td>{{ data.amount * data.price }}</td>
+                <td>
+                  <nz-icon
+                    (click)="deleteData(data.id)"
+                    nzType="delete"
+                    nzTheme="outline"
+                    style="color: red"
+                    class="nz-icon-action"
+                  />
+                </td>
+              </tr>
+              }
+            </tbody>
+          </nz-table>
+        </div>
+      </ng-container>
+    </nz-modal>
+  </div>
+  

@@ -10,6 +10,5 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent {
   constructor(private router:Router){
-    router.navigate(['/landing'])
   }
 }

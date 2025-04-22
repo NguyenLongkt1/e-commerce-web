@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../../environments/environment.development';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { BehaviorSubjectCartService } from '../../../subject-services/behavior-subject-cart.service';
+import { LandingBaseComponent } from '../../../base/landing-base';
+import { BehaviorSubjectModalService } from '../../../subject-services/behavior-subject-modal.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,10 +14,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailComponent extends LandingBaseComponent implements OnInit, OnDestroy, AfterViewInit{
 
   constructor(private activatedRoute: ActivatedRoute, private httpClient:HttpClient,
-        private formBuilder:FormBuilder){
+        private formBuilder:FormBuilder,private behaviorSubjectCartService:BehaviorSubjectCartService,
+        private behaviorSubjectModalService:BehaviorSubjectModalService){
+    super();
     this.activatedRoute.params.subscribe(params=>{
       if('id' in params){
         this.id = params['id'];
@@ -27,7 +32,7 @@ export class ProductDetailComponent implements OnInit{
 
   @ViewChild('contentElement') contentElement!: ElementRef;
   showToggle: boolean = false;
-
+  private resizeObserver: ResizeObserver | null = null;
   productDetail:any;
   choosenImg:any;
   id:any;
@@ -43,6 +48,16 @@ export class ProductDetailComponent implements OnInit{
     })
   }
 
+  addToCart(productDetail:any){
+    super.checkLoginBeforeChangeRoute(
+      ()=>this.behaviorSubjectModalService.openModal(),
+      ()=>{
+        this.behaviorSubjectCartService.addItem(productDetail.id)
+        this.behaviorSubjectCartService.addFakeItem(productDetail)
+      }
+    )
+  }
+
   setBuyValue(value:any){
     this.buyValue = value;
   }
@@ -55,16 +70,29 @@ export class ProductDetailComponent implements OnInit{
     }
   }
 
-  ngAfterViewInit(): void {
-    // Kiểm tra kích thước của phần tử sau khi view được khởi tạo
-    const contentHeight = this.contentElement.nativeElement.offsetHeight;
+  ngAfterViewInit() {
+    // Khởi tạo ResizeObserver
+    this.resizeObserver = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const height = entry.contentRect.height;
+        this.showToggle = height >= 300;
+      }
+    });
+    this.resizeObserver.observe(this.contentElement.nativeElement);
+    // Kiểm tra kích thước ban đầu
+    this.checkViewportHeight();
+  }
 
-    // Kiểm tra xem phần tử có chiều cao vượt quá 300px không
-    if (contentHeight > 300) {
-      this.showToggle = true; 
-    } else {
-      this.showToggle = false;
+  ngOnDestroy() {
+    // Dọn dẹp ResizeObserver khi component bị hủy
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
     }
+  }
+
+  private checkViewportHeight() {
+    const height = this.contentElement.nativeElement.offsetHeight;
+    this.showToggle = height >= 300;
   }
 
   ngOnInit(): void {

@@ -28,7 +28,12 @@
                         <span class="h5">Tài khoản</span>
                     </div>
                     <div class="text-button"> 
-                        <nz-icon nzType="shopping-cart" nzTheme="outline" class="pi pi-shopping-cart main-color default-icon-size" />
+                        <nz-badge [nzCount]="countCartItem">
+                            <nz-icon nzType="shopping-cart" nzTheme="outline" 
+                                class="pi pi-shopping-cart main-color default-icon-size"
+                                (click)="showCart()"
+                            />
+                        </nz-badge>
                     </div>
                 </div>
             </div>

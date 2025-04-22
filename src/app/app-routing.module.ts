@@ -5,11 +5,6 @@ import { LandingModule } from './components/landing/landing.module';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: '/landing'
-  },
-  {
     path: 'landing',
     pathMatch: 'full',
     loadChildren: () => import('./routing/landing-routing.module').then(m => m.LandingRoutingModule)
@@ -18,6 +13,11 @@ const routes: Routes = [
     path: 'cms',
     pathMatch: 'full',
     loadChildren: () => import('./routing/cms-routing.module').then(m => m.CmsRoutingModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/landing'
   }
 ];
 

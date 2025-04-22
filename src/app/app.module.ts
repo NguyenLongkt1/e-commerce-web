@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
-
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideNzI18n } from 'ng-zorro-antd/i18n';
@@ -44,6 +44,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SanitizerHtmlPipe } from './pipe/sanitizer-html-pipe';
 import { InputNumberSelectorComponent } from './components/common/input-number-selector/input-number-selector.component';
 import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { CartListComponent } from './components/cms/cart-list/cart-list.component';
+import { AddEditCartComponent } from './components/cms/cart-list/add-edit-cart/add-edit-cart.component';
+import { LandingBaseComponent } from './base/landing-base';
+import { CartComponent } from './components/landing/cart/cart.component';
+import { FooterPageComponent } from './components/landing/footer-page/footer-page.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -68,6 +73,12 @@ registerLocaleData(en);
     ProductDetailComponent,
     SanitizerHtmlPipe,
     InputNumberSelectorComponent,
+    CartListComponent,
+    AddEditCategoryComponent,
+    AddEditCartComponent,
+    LandingBaseComponent,
+    CartComponent,
+    FooterPageComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +100,8 @@ registerLocaleData(en);
     NzRateModule,
     CKEditorModule,
     NzInputNumberModule,
+    NzModalModule,
+    NzBadgeModule,
   ],
   exports: [
     FormsModule,
@@ -107,6 +120,8 @@ registerLocaleData(en);
     NzIconModule,
     CKEditorModule,
     NzInputNumberModule,
+    NzModalModule,
+    NzBadgeModule,
   ],
   providers: [
     provideClientHydration(withEventReplay()),
