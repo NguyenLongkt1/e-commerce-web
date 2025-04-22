@@ -7,6 +7,7 @@ RUN npm run build
 
 # Stage 2: Serve app with nginx server
 FROM nginx:latest
-COPY --from=build /usr/local/app/dist/e-commerce-web /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
+COPY --from=build /usr/local/app/dist/* /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
