@@ -1,5 +1,8 @@
 <div>
     <button nz-button [ngClass]="{'disable-btn': (!allowRemoveProduct && chooseValue == 1) || (allowRemoveProduct && chooseValue == 0), 'customSizeBtn': true}" (click)="reduceValue()"><nz-icon nzType="minus" nzTheme="outline" /></button>
-    <nz-input-number class="custom-input-number" [nzControls]="false" [(ngModel)]="chooseValue" [nzMin]="minValue" [nzMax]="maxValue" (ngModelChange)="sendValue($event)"/>
+    <nz-input-number class="custom-input-number" [nzControls]="false" 
+       [(ngModel)]="chooseValue" [nzMin]="minValue" [nzMax]="maxValue" 
+       (ngModelChange)="sendValue($event)" 
+       />
     <button nz-button [ngClass]="{'disable-btn': chooseValue == maxValue, 'customSizeBtn': true}" (click)="inCreaseValue()"><nz-icon nzType="plus" nzTheme="outline" /></button>
 </div>
