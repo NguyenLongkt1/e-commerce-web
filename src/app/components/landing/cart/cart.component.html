@@ -41,7 +41,8 @@
                     @for (data of rowSelectionTable.data; track data) {
                     <tr>
                         <td [nzChecked]="setOfCheckedId.has(data.id ?? 1)" (nzCheckedChange)="onItemChecked(data.id ?? 1, $event)"></td>
-                        <td>
+                        <td class="d-flex gap-2">
+                            <img src="{{data.thumbnail}}" style="width: 60px;height: 60px"/>
                             {{ data.name }}
                         </td>
                         <td class="price-style">{{ data.price | currency : 'VND' : '' : '1.0-0' }}
@@ -54,6 +55,9 @@
                                 [maxValue]="10"
                                 [allowRemoveProduct]="true"
                                 (selectedValue)="setBuyValue($event)"
+                                (selectedItemId)="setItemId($event)"
+                                [record]="data"
+                                [itemId]="data.id"
                             ></app-input-number-selector>
                         </td>
                         <td class="price-style">{{ (data.price ? data.price * 1 : 0) | currency : 'VND' : '' : '1.0-0' }}
@@ -72,7 +76,7 @@
                 <div class="mt-2">
                     <h6>Tạm tính</h6>
                     <div class="mt-2">
-                        <h5 class="price-style">{{0 | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
+                        <h5 class="price-style">{{totalPay | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
                     </div>
                 </div>
                 <hr>
@@ -81,12 +85,12 @@
                         <h6>Tổng tiền thanh toán</h6>
                     </div>
                     <div class="col-md-6">
-                        <h5 class="price-style" style="text-align: right;">{{0 | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
+                        <h5 class="price-style" style="text-align: right;">{{ totalPay | currency : 'VND' : '' : '1.0-0'}} <sup class="text-bold sup-custom">₫</sup></h5>
                     </div>
                 </div>
                 <div class="mt-2">
                     <div class="mt-2">
-                        <button nz-button nzDanger nzType="primary" style="width: 100%;">Mua hàng</button>
+                        <button nz-button nzDanger nzType="primary" style="width: 100%;">Mua hàng ({{countItemBuy}})</button>
                     </div>
                 </div>
             </div>

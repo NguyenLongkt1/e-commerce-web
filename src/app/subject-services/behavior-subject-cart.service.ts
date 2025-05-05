@@ -29,4 +29,8 @@ export class BehaviorSubjectCartService {
     this.fakeItem.next(item)
   }
 
+  firstCountItem(quantity:any){
+    this.itemCount.next(quantity)
+  }
+
 }
