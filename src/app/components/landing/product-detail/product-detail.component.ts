@@ -38,7 +38,7 @@ export class ProductDetailComponent extends LandingBaseComponent implements OnIn
   id:any;
   lstFile:any = [];
   formRating:FormGroup;
-  buyValue = 1;
+  buyValue:any = 1;
   textContent:any="Xem thêm";
 
   async getProductDetail(){
@@ -53,10 +53,24 @@ export class ProductDetailComponent extends LandingBaseComponent implements OnIn
       ()=>this.behaviorSubjectModalService.openModal(),
       ()=>{
         this.behaviorSubjectCartService.addItem(productDetail.id)
-        this.behaviorSubjectCartService.addFakeItem(productDetail)
+        this.behaviorSubjectCartService.addFakeItem(productDetail);
+        let cartId = sessionStorage.getItem("cartId");
+        if(cartId){
+          let params = {
+            'cartId': Number.parseInt(cartId),
+            'productId': productDetail.id,
+            'quantity': this.buyValue.quantity
+          }
+          this.httpClient.post(environment.apiUrl+"/carts/api/carts/add-product-to-cart",params)
+          .subscribe((e:any)=>{
+            console.log('add product to cart: ',e);
+          })
+        }
       }
     )
   }
+
+
 
   setBuyValue(value:any){
     this.buyValue = value;

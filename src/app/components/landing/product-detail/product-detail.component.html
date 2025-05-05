@@ -70,13 +70,14 @@
                                 [minValue]="1" 
                                 [maxValue]="10"
                                 (selectedValue)="setBuyValue($event)"
+                                [record]="productDetail"
                             ></app-input-number-selector>
                         </div>
                     </div>
                     <div class="mt-2">
                         <h6>Tạm tính</h6>
                         <div class="mt-2">
-                            <h5 class="price-style">{{(productDetail.price * buyValue) | currency : 'VND' : '' : '1.0-0'}} <sup *ngIf="productDetail.price" class="text-bold sup-custom">₫</sup></h5>
+                            <h5 class="price-style">{{ (productDetail.price * buyValue.quantity) | currency : 'VND' : '' : '1.0-0'}} <sup *ngIf="productDetail.price" class="text-bold sup-custom">₫</sup></h5>
                         </div>
                     </div>
                     <div class="mt-2">
