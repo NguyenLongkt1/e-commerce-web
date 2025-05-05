@@ -49,6 +49,8 @@ import { AddEditCartComponent } from './components/cms/cart-list/add-edit-cart/a
 import { LandingBaseComponent } from './base/landing-base';
 import { CartComponent } from './components/landing/cart/cart.component';
 import { FooterPageComponent } from './components/landing/footer-page/footer-page.component';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { AccountComponent } from './components/landing/account/account.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -78,7 +80,8 @@ registerLocaleData(en);
     AddEditCartComponent,
     LandingBaseComponent,
     CartComponent,
-    FooterPageComponent
+    FooterPageComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +105,7 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzModalModule,
     NzBadgeModule,
+    NzDropDownModule
   ],
   exports: [
     FormsModule,
@@ -122,6 +126,7 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzModalModule,
     NzBadgeModule,
+    NzDropDownModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),
