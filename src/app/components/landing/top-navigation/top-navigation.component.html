@@ -23,9 +23,25 @@
                         <nz-icon nzType="home" nzTheme="outline" class="main-color default-icon-size me-2"/>
                         <span class="main-color h5">Trang chủ</span>
                     </div>
-                    <div class="text-button-grey" (click)="showDialogLogin()">
-                        <nz-icon nzType="smile" nzTheme="outline" class="default-icon-size me-2"/>
-                        <span class="h5">Tài khoản</span>
+                    <div class="account-container">
+                        <div *ngIf="!isLogined" class="text-button-grey" (click)="showDialogLogin()">
+                            <nz-icon nzType="smile" nzTheme="outline" class="default-icon-size me-2"/>
+                            <span class="h5">Tài khoản</span>
+                        </div>
+                        <div *ngIf="isLogined">
+                            <div class="text-button-grey" nz-dropdown [nzDropdownMenu]="menu">
+                                <nz-icon nzType="smile" nzTheme="outline" class="default-icon-size me-2"/>
+                                <span class="h5">Tài khoản</span>
+                            </div>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                <ul nz-menu class="dropdown-acc">
+                                    <li nz-menu-item>Thông tin tài khoản</li>
+                                    <li nz-menu-item>Đơn hàng của tôi</li>
+                                    <li nz-menu-item>Trung tâm hỗ trợ</li>
+                                    <li nz-menu-item>Đăng xuất</li>
+                                </ul>
+                            </nz-dropdown-menu>
+                        </div>
                     </div>
                     <div class="text-button"> 
                         <nz-badge [nzCount]="countCartItem">

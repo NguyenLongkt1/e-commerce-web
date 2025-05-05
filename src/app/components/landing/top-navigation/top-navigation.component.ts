@@ -3,11 +3,12 @@ import { BehaviorSubjectCartService } from '../../../subject-services/behavior-s
 import { LandingBaseComponent } from '../../../base/landing-base';
 import { BehaviorSubjectModalService } from '../../../subject-services/behavior-subject-modal.service';
 import { Router } from '@angular/router';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-top-navigation',
   standalone: false,
-  
   templateUrl: './top-navigation.component.html',
   styleUrl: './top-navigation.component.scss'
 })
@@ -17,6 +18,8 @@ export class TopNavigationComponent extends LandingBaseComponent implements OnIn
       private behaviorSubjectModalService:BehaviorSubjectModalService,
       private router:Router){
     super();
+
+    this.isLogined = sessionStorage.getItem('token') ? true : false;
     this.behaviorSubjectCartService.itemCount$.subscribe(count => {
       this.countCartItem = count;
     });
@@ -27,6 +30,7 @@ export class TopNavigationComponent extends LandingBaseComponent implements OnIn
   }
   visible = false;
   countCartItem = 0;
+  isLogined = false;
 
   showDialogLogin(){
     this.behaviorSubjectModalService.openModal()
@@ -48,7 +52,10 @@ export class TopNavigationComponent extends LandingBaseComponent implements OnIn
   }
 
   ngOnInit(): void {
-    
+    let totalQuantity = sessionStorage.getItem('quantity_on_cart');
+    if(totalQuantity){
+      this.behaviorSubjectCartService.firstCountItem(Number.parseInt(totalQuantity))
+    }
   }
 
 }
